@@ -1,0 +1,83 @@
+/var/log/asterisk/debug
+/var/log/asterisk/console {
+	daily
+	missingok
+	rotate 30
+	compress
+	delaycompress
+	notifempty
+	create 640 asterisk asterisk
+	sharedscripts
+	postrotate
+		/usr/sbin/asterisk -rx 'logger reload' > /dev/null 2> /dev/null
+	endscript
+}
+
+/var/log/asterisk/full {
+	weekly
+	missingok
+	rotate 12
+	compress
+	delaycompress
+	notifempty
+	create 640 asterisk asterisk
+	sharedscripts
+	postrotate
+		/usr/sbin/asterisk -rx 'logger reload' > /dev/null 2> /dev/null
+	endscript
+}
+
+/var/log/asterisk/security
+/var/log/asterisk/messages {
+	daily
+	missingok
+	rotate 90
+	compress
+	delaycompress
+	notifempty
+	create 640 asterisk asterisk
+	sharedscripts
+	postrotate
+		/usr/sbin/asterisk -rx 'logger reload' > /dev/null 2> /dev/null
+	endscript
+}
+
+/var/log/asterisk/*log {
+	weekly
+	missingok
+	rotate 12
+	compress
+	delaycompress
+	notifempty
+	create 640 asterisk asterisk
+	nosharedscripts
+	prerotate
+		bash -c "[[ ! $1 =~ queue_log ]]"
+	endscript
+	postrotate
+		/usr/sbin/asterisk -rx 'logger reload' > /dev/null 2> /dev/null
+	endscript
+}
+
+/var/spool/mail/asterisk {
+	monthly
+	missingok
+	rotate 12
+	compress
+	delaycompress
+	notifempty
+	create 640 asterisk mail
+	sharedscripts
+	postrotate
+		/usr/sbin/asterisk -rx 'logger reload' > /dev/null 2> /dev/null
+	endscript
+}
+
+/var/log/asterisk/cdr-csv/*csv
+/var/log/asterisk/cdr-custom/*csv {
+	monthly
+	missingok
+	rotate 12
+	compress
+	delaycompress
+}
