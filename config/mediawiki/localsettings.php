@@ -1,6 +1,6 @@
 # LDAP integration
 
-# Enable auth and access extensions
+# Enable required auth and access extensions
 wfLoadExtension( 'Auth_remoteuser' );
 wfLoadExtension( 'LDAPAuthentication2' );
 wfLoadExtension( 'LDAPAuthorization' );
@@ -10,36 +10,35 @@ wfLoadExtension( 'LDAPUserInfo' );
 wfLoadExtension( 'OATHAuth' );
 wfLoadExtension( 'PluggableAuth' );
 
-# Logging / Debugging settings
+# Enable logging / debugging settings
 #    https://www.mediawiki.org/wiki/Manual:How_to_debug#Logging
 #    # Enable/Disable logging for debugging.
 #    # Verbose but really helped me figure out what was going on as I could tail follow all the logs
 #    # as I worked on the config. The online docs were not enough.
 #
-$wgShowExceptionDetails           = true ;
-#$wgDevelopmentWarnings            = true;
-## $wgShowDebug                      = false;  # enable some debugging on screen
-## $wgDebugToolbar                   = true;  # http://www.mediawiki.org/wiki/Manual:How_to_debug
-$wgDebugLogFile                   = "/var/log/mediawiki/debug-${wgDBname}.log" ;
-## $wgDBerrorLog                     = "/var/log/mediawiki/dberror.log" ;
-$wgRateLimitLog                   = "/var/log/mediawiki/ratelimit.log" ;
+$wgShowExceptionDetails = true ;
+#$wgDevelopmentWarnings = true;
+## $wgShowDebug = false;  # enable some debugging on screen
+## $wgDebugToolbar = true;  # http://www.mediawiki.org/wiki/Manual:How_to_debug
+$wgDebugLogFile = "/var/log/mediawiki/debug-${wgDBname}.log" ;
+## $wgDBerrorLog = "/var/log/mediawiki/dberror.log" ;
+$wgRateLimitLog = "/var/log/mediawiki/ratelimit.log" ;
 // this finally worked. ldap.log got a log from PluggableAuth
-$wgDebugLogGroups                 = array(
-     'BMWExtension'               => "/var/log/mediawiki/bmwextension.log",
-     'resourceloader'             => '/var/log/mediawiki/resourceloader.log',
-     'exception'                  => '/var/log/mediawiki/exception.log',
-     'error'                      => '/var/log/mediawiki/error.log',
-     'exception-json'             => '/var/log/mediawiki/exception.json',
-     'Auth_remoteuser'            => '/var/log/mediawiki/Auth_remoteuser.log',
-     'LDAPAuthentication2'        => '/var/log/mediawiki/LDAPAuthentication2.log',
-     'LDAPAuthorization'          => '/var/log/mediawiki/LDAPAuthorization.log',
-     'LDAPGroups'                 => '/var/log/mediawiki/LDAPGroups.log',
-     'LDAPUserInfo'               => '/var/log/mediawiki/LDAPUserInfo.log',
-     'LDAPProvider'               => '/var/log/mediawiki/LDAPProvider.log',
-     'PluggableAuth'              => '/var/log/mediawiki/PluggableAuth.log',
-     'LDAP'                       => '/var/log/mediawiki/ldap.log',
+$wgDebugLogGroups = array(
+     'BMWExtension' => "/var/log/mediawiki/bmwextension.log",
+     'resourceloader' => '/var/log/mediawiki/resourceloader.log',
+     'exception' => '/var/log/mediawiki/exception.log',
+     'error' => '/var/log/mediawiki/error.log',
+     'exception-json' => '/var/log/mediawiki/exception.json',
+     'Auth_remoteuser' => '/var/log/mediawiki/Auth_remoteuser.log',
+     'LDAPAuthentication2' => '/var/log/mediawiki/LDAPAuthentication2.log',
+     'LDAPAuthorization' => '/var/log/mediawiki/LDAPAuthorization.log',
+     'LDAPGroups' => '/var/log/mediawiki/LDAPGroups.log',
+     'LDAPUserInfo' => '/var/log/mediawiki/LDAPUserInfo.log',
+     'LDAPProvider' => '/var/log/mediawiki/LDAPProvider.log',
+     'PluggableAuth' => '/var/log/mediawiki/PluggableAuth.log',
+     'LDAP' => '/var/log/mediawiki/ldap.log',
      'MediaWiki\\Extension\\LDAPProvider\\Client' => '/var/log/mediawiki/LDAPClient.log'
-
 );
 
 #############################################
@@ -121,20 +120,20 @@ if (! is_file( $ldapJsonFile ) ) {
 ##
 ##     LDAPProvider
 ##
-$LDAPProviderDomainConfigs        = "/etc/mediawiki/ldapprovider.json" ;
-$LDAPProviderCacheType            = "CACHE_ANYTHING" ;
-$LDAPProviderCacheTime            = 500 ;
+$LDAPProviderDomainConfigs = "/etc/mediawiki/ldapprovider.json" ;
+$LDAPProviderCacheType = "CACHE_ANYTHING" ;
+$LDAPProviderCacheTime = 500 ;
 $LDAPProviderDomainConfigProvider = "\\MediaWiki\\Extension\\LDAPProvider\\DomainConfigProvider\\LocalJSONFile::newInstance" ;
-$LDAPProviderDefaultDomain        = '5-55.ru' ;
+$LDAPProviderDefaultDomain = '5-55.ru' ;
 
 ##############################################
 ##
 ##     LDAPAuth
 ##     See https://www.mediawiki.org/wiki/Extension:LDAPAuthorization
 ##
-$wgLdapAuthDomainNames        = '5-55.ru' ;
-$wgLdapAuthIsActiveDirectory  = '5-55.ru';
-$wgLdapAuthSearchTree         =  true ;
+$wgLdapAuthDomainNames = '5-55.ru' ;
+$wgLdapAuthIsActiveDirectory = '5-55.ru';
+$wgLdapAuthSearchTree = true ;
 
 ###############################################
 ##
@@ -153,9 +152,9 @@ $LDAPAuthentication2UsernameNormalizer = 'strtolower';
 ##     extension $wgPluggableAuth which is required for LDAP
 ##     https://www.mediawiki.org/wiki/Extension:PluggableAuth
 ##
-$wgPluggableAuth_EnableAutoLogin  = true ; 
+$wgPluggableAuth_EnableAutoLogin = true ; 
 $wgPluggableAuth_EnableLocalProperties = false ; 
-$wgPluggableAuth_ButtonLabel = "Войти"; # defaults to "Login with PluggableAuth "
+$wgPluggableAuth_ButtonLabel = "Войти"; # defaults to "Login with PluggableAuth"
 
 ##
 ##     END LDAP Stack Settings
