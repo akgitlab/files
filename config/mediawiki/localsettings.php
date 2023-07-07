@@ -1,8 +1,8 @@
 <?php
 
-# /var/www/mediawiki/LocalSettings.php
-
+# To enable this configuration, you need to add to the file /var/www/mediawiki/LocalSettings.php this lines
 # Settings for LDAP integration
+# include "scripts/ldap.php";
 
 # Enable required auth and access extensions
 wfLoadExtension( 'Auth_remoteuser' );
@@ -174,8 +174,8 @@ $wgPluggableAuth_Config['Войти'] = [
 ##
 ##     END LDAP Stack Settings
 ##
-
-?>
 ################################################
 
 ### END LocalSettings.php ###
+
+?>
