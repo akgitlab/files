@@ -154,8 +154,19 @@ $LDAPAuthentication2UsernameNormalizer = 'strtolower';
 ##
 $wgPluggableAuth_EnableAutoLogin = true ; 
 $wgPluggableAuth_EnableLocalProperties = false ; 
-$wgPluggableAuth_ButtonLabel = "Войти"; # defaults to "Login with PluggableAuth"
+$wgPluggableAuth_ButtonLabel = "Войти";
 
+# In version mediawiki 1.39 did not work without these lines
+# https://www.mediawiki.org/wiki/Extension_talk:LDAPAuthentication2
+$wgPluggableAuth_Class="MediaWiki\\Extension\\LDAPAuthentication2\\PluggableAuth";
+$wgPluggableAuth_Config['Войти'] = [
+    'plugin' => 'LDAPAuthentication2',
+    'data' => [
+        'domain' => '5-55.ru'
+    ]
+];
+
+################################################
 ##
 ##     END LDAP Stack Settings
 ##
